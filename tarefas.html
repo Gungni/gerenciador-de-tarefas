@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciador de Tarefas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.0.2/mammoth.browser.min.js"></script>
+
+</head>
+<body>
+
+    <div id="task-form-container">
+    
+        <form id="task-form">
+            <h2>Criar Tarefa</h2>
+            <label for="task-title">Título da Tarefa:</label>
+            <input type="text" id="task-title" name="task-title" required>
+
+            <label for="priority">Prioridade:</label>
+            <select id="priority" name="priority">
+                <option value="high">Alta</option>
+                <option value="medium">Média</option>
+                <option value="low">Baixa</option>
+            </select>
+
+            <label for="assignee">Responsável:</label>
+            <input type="text" id="assignee" name="assignee">
+
+            <label for="due-date">Data de Vencimento:</label>
+            <input type="date" id="due-date" name="due-date">
+
+            <label for="description">Descrição:</label>
+            <textarea id="description" name="description"></textarea>
+
+            <label for="checklist">Checklist (separe os itens por vírgulas):</label>
+            <input type="text" id="checklist" name="checklist">
+
+            <button type="button" onclick="addTask()">Criar Tarefa</button>
+            <button type="button" onclick="clearLocalStorage()">Limpar Tarefas</button>
+        </form>
+    </div>
+
+    <div id="edit-task-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEditModal()">&times;</span>
+            <h2>Editar Tarefa</h2>
+            <form id="edit-task-form">
+                <label for="edit-task-title">Título da Tarefa:</label>
+                <input type="text" id="edit-task-title" name="edit-task-title" required>
+
+                <label for="edit-priority">Prioridade:</label>
+                <select id="edit-priority" name="edit-priority">
+                    <option value="high">Alta</option>
+                    <option value="medium">Média</option>
+                    <option value="low">Baixa</option>
+                </select>
+
+                <label for="edit-assignee">Responsável:</label>
+                <input type="text" id="edit-assignee" name="edit-assignee">
+
+                <label for="edit-due-date">Data de Vencimento:</label>
+                <input type="date" id="edit-due-date" name="edit-due-date">
+
+                <label for="edit-description">Descrição:</label>
+                <textarea id="edit-description" name="edit-description"></textarea>
+
+                <label for="edit-checklist">Checklist (separe os itens por vírgulas):</label>
+                <input type="text" id="edit-checklist" name="edit-checklist">
+
+                <button type="button" onclick="saveChanges()">Salvar Alterações</button>
+                <button type="button" onclick="deleteTask()">Excluir Tarefa</button>
+                
+            </form>
+        </div>
+    </div>
+
+    <div id="task-list">
+        <h2>Lista de Tarefas</h2>
+        <button onclick="baixarTarefas()">Baixar Tarefas</button>
+        <div id="tasks-container"></div>
+    </div>
+
+    <div id="completed-tasks">
+        <h2>Tarefas Concluídas</h2>
+        <div id="completed-container"></div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Akhasic | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Serviço</a></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
