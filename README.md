@@ -1,66 +1,68 @@
 # gerenciador-de-tarefas
-Documentação do Projeto
-Aplicativo de Gerenciamento de Tarefas - Akhasic
+Gerenciador de Tarefas - Akhasic
 
-Requisitos
-1. Criação de Tarefas:
-- Os usuários podem criar tarefas especificando um título, prioridade, responsável, data de
-vencimento, descrição e checklist.
-2. Edição de Tarefas:
-- Os usuários podem editar tarefas existentes, incluindo a capacidade de modificar título,
-prioridade, responsável, data de vencimento, descrição e checklist, além da possibilidade de
-exclusão da tarefa.
-3. Conclusão de Tarefas:
-- Os usuários podem marcar uma tarefa como concluída, movendo-a para a seção de
-tarefas concluídas.
-4. Modal de Edição:
-- Um modal de edição é apresentado aos usuários para facilitar a edição de tarefas.
-5. Armazenamento Local:
-- As tarefas criadas e as tarefas concluídas são armazenadas localmente no navegador
-do usuário usando o localStorage.
-6. Download de Tarefas:
-- Os usuários podem baixar todas as tarefas, incluindo as concluídas, em formato JSON.
-7. Limpeza do Armazenamento Local:
-- Os usuários têm a opção de limpar todas as tarefas armazenadas localmente, com uma
-confirmação antes da ação.
-Funcionalidades
-1. Adicionar Tarefa:
-- Coleta informações do usuário, cria dinamicamente um elemento HTML representando a
-tarefa e a adiciona à lista de tarefas.
-2. Editar Tarefa:
-- Abre uma modal preenchida com os detalhes da tarefa selecionada para permitir a
-edição dos campos.
-3. Salvar Alterações:
-- Salva as alterações feitas em uma tarefa editada e atualiza a exibição.
-4. Excluir tarefa:
-- exclui determinada tarefa.
-5. Concluir Tarefa:
-- Move uma tarefa da lista de tarefas para a lista de tarefas concluídas.
-6. Exportar Tarefas:
-- Cria um arquivo JSON contendo as informações de todas as tarefas, permitindo o
-download.
-7. Limpar Tarefas:
-- Limpa todas as tarefas armazenadas localmente, proporcionando uma confirmação do
-usuário.
-8. Carregar Tarefas do Armazenamento Local:
-- Ao carregar a página, recupera as tarefas armazenadas localmente e as exibe.
-Técnicas Utilizadas
-A implementação da aplicação de gerenciamento de tarefas foi realizada por meio de uma
-combinação de HTML, CSS e JavaScript.
-1. HTML:
-- Estruturação da página web.
-- Utilização de formulários, divs, botões e elementos semânticos.
-2. CSS:
-- Estilização da aparência da página.
-- Utilização de classes, IDs e seletores para aplicar estilos.
-3. JavaScript:
-- Manipulação do DOM (Document Object Model).
-- Funções para adicionar, editar, concluir e exportar tarefas.
-- Uso do localStorage para armazenar dados localmente no navegador.
-- Interatividade com eventos do usuário.
-Observações Finais
-Este projeto de gerenciamento de tarefas oferece uma interface simples e funcionalidades
-essenciais para o usuário organizar suas tarefas diárias. A combinação de técnicas de
-desenvolvimento web permite uma experiência intuitiva e eficiente no controle das
-atividades. Para futuras melhorias, considere a adição de recursos adicionais, como
-notificações e categorização de tarefas
+Descrição
+
+O Gerenciador de Tarefas é uma aplicação web simples desenvolvida em HTML, CSS e JavaScript, projetada para permitir aos usuários criar, editar, excluir, concluir, baixar e organizar tarefas de uma forma simples e concisa.
+
+Conteúdo do Projeto
+
+O projeto é composto por três arquivos principais:
+
+1. html: Contém a estrutura HTML básica do projeto, incluindo elementos para criar tarefas, exibir tarefas e visualizar tarefas concluídas.
+
+2. css:Dois arquivos CSS que fornecem estilos diferentes para a aplicação.
+
+3. script.js:Contém funções JavaScript que implementam a lógica do Gerenciador de Tarefas. Isso inclui a criação, edição, exclusão, inclusão e organização de tarefas, além de funcionalidades como baixar tarefas e alternar estilos.
+
+Funcionalidades Principais
+
+1. Criação de Tarefas
+
+Os usuários podem criar uma nova tarefa especificando os seguintes detalhes:
+   - Título da tarefa
+   - Prioridade
+   - Responsável
+   - Data de vencimento
+   - Descrição
+   - Checklist
+
+2. Edição de Tarefas
+
+Usuários podem editar uma tarefa existente, modificando detalhes como título, prioridade, responsável, data de vencimento, descrição e checklist.
+
+3. Exclusão de Tarefas
+
+Usuários podem excluir uma tarefa existente.
+
+4. Conclusão de Tarefas
+
+Usuários podem marcar uma tarefa como concluída, movendo-a para a seção de tarefas concluídas.
+
+5. Limpeza de Tarefas
+
+Opção para limpar todas as tarefas armazenadas.
+
+6. Download de Tarefas
+
+Usuários podem baixar as tarefas em formato JSON.
+
+7. Organização de Tarefas
+
+Usuários podem organizar tarefas por data de vencimento ou prioridade.
+
+8. Alternância de Estilos
+
+Foi implementado um switch que permite aos usuários alternar entre dois conjuntos de estilos visuais para a aplicação.
+
+Instalação e Uso:
+
+1. Clone ou baixe o repositório para o seu ambiente local.
+2. Abra o arquivo `index.html` em um navegador web compatível.
+3. Utilize as funcionalidades fornecidas pelo Gerenciador de Tarefas conforme necessário.
+
+Observações
+
+- Este projeto é um exemplo básico e pode ser expandido para atender a requisitos específicos adicionais..
+- Este documento serve como uma visão geral das funcionalidades e estrutura do projeto, podendo ser complementado com mais detalhes conforme necessário.
+

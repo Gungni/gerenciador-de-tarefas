@@ -1,3 +1,53 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const styleSwitchButton = document.getElementById('style-switch');
+
+    styleSwitchButton.addEventListener('click', toggleStyles);
+
+    loadSavedStyle();
+
+    function toggleStyles() {
+        const currentStyle = getCurrentStyle();
+        const newStyle = currentStyle === 'default' ? 'alt' : 'default';
+
+        document.getElementById('page-style').setAttribute('href', `styles_${newStyle}.css`);
+
+        saveStyleState(newStyle);
+    }
+
+    function saveStyleState(style) {
+        localStorage.setItem('styleState', style);
+    }
+
+    function loadSavedStyle() {
+        const savedStyle = localStorage.getItem('styleState') || 'default';
+        document.getElementById('page-style').setAttribute('href', `styles_${savedStyle}.css`);
+    }
+
+    function getCurrentStyle() {
+        const currentStyleHref = document.getElementById('page-style').getAttribute('href');
+        return currentStyleHref.includes('styles_default.css') ? 'default' : 'alt';
+    }
+});
+
+
+function mostrarConteudo(conteudo) {
+    const taskForm = document.getElementById('task-form-container');
+    const taskList = document.getElementById('task-list');
+    const completedTasks = document.getElementById('completed-tasks');
+
+    taskForm.style.display = 'none';
+    taskList.style.display = 'none';
+    completedTasks.style.display = 'none';
+
+    if (conteudo === 'task-form') {
+        taskForm.style.display = 'block';
+    } else if (conteudo === 'task-list') {
+        taskList.style.display = 'block';
+    } else if (conteudo === 'completed-tasks') {
+        completedTasks.style.display = 'block';
+    }
+}
+
 function addTask() {
     const title = document.getElementById('task-title').value;
     const priority = document.getElementById('priority').value;
@@ -16,7 +66,7 @@ function addTask() {
 
         let taskContent = `
             <h3>${title}</h3>
-            <p>Prioridade: ${priority}</p>
+            <p>Prioridade: ${traduzirPrioridade(priority)}</p>
             <p>Responsável: ${assignee}</p>
             <p>Data de Vencimento: ${dueDate}</p>
             <p>Descrição: ${description}</p>
@@ -42,6 +92,19 @@ function addTask() {
         saveTasksToLocalStorage();
     } else {
         alert('Por favor, preencha todos os campos obrigatórios.');
+    }
+}
+
+function traduzirPrioridade(priority) {
+    switch (priority) {
+        case 'high':
+            return 'Alta';
+        case 'medium':
+            return 'Média';
+        case 'low':
+            return 'Baixa';
+        default:
+            return priority;
     }
 }
 
@@ -79,9 +142,9 @@ function openEditModal(taskDiv) {
 
         <label for="edit-priority">Prioridade:</label>
         <select id="edit-priority" name="edit-priority">
-            <option value="high" ${priority === 'Alta' ? 'selected' : ''}>Alta</option>
-            <option value="medium" ${priority === 'Média' ? 'selected' : ''}>Média</option>
-            <option value="low" ${priority === 'Baixa' ? 'selected' : ''}>Baixa</option>
+            <option value="Alta" ${priority === 'Alta' ? 'selected' : ''}>Alta</option>
+            <option value="Média" ${priority === 'Média' ? 'selected' : ''}>Média</option>
+            <option value="Baixa" ${priority === 'Baixa' ? 'selected' : ''}>Baixa</option>
         </select>
 
         <label for="edit-assignee">Responsável:</label>
@@ -215,8 +278,6 @@ function loadTasksFromLocalStorage() {
 
     tasksContainer.innerHTML = tasksHTML || '';
     completedContainer.innerHTML = completedHTML || '';
-
-    updateProgressBar();
 }
 
 loadTasksFromLocalStorage();
@@ -225,32 +286,25 @@ function baixarTarefas() {
     const contTasks = document.getElementById('tasks-container');
     const contTarefasConcluidas = document.getElementById('completed-container');
 
-    // Obter os dados do HTML interno dos contêineres
     const htmlTarefas = contTasks.innerHTML;
     const htmlTarefasConcluidas = contTarefasConcluidas.innerHTML;
 
-    // Criar um objeto com propriedades significativas
     const dadosTarefas = {
         tarefas: extrairDadosTarefas(htmlTarefas),
         tarefasConcluidas: extrairDadosTarefas(htmlTarefasConcluidas)
     };
 
-    // Converter o objeto em uma string JSON
     const jsonDados = JSON.stringify(dadosTarefas, null, 2);
 
-    // Criar um Blob (Binary Large Object) com os dados JSON
     const blob = new Blob([jsonDados], { type: 'application/json' });
 
-    // Criar um link para o Blob
     const linkDownload = document.createElement('a');
     linkDownload.href = URL.createObjectURL(blob);
     
-    // Definir o nome do arquivo
     const data = new Date();
     const nomeArquivo = `tarefas_export_${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}.json`;
     linkDownload.download = nomeArquivo;
 
-    // Anexar o link ao corpo do documento e clicar nele para iniciar o download
     document.body.appendChild(linkDownload);
     linkDownload.click();
 
@@ -288,4 +342,110 @@ function extrairChecklist(ul) {
     });
 
     return itensChecklist;
+}
+
+function organizarPorData() {
+    const tasksContainer = document.getElementById('tasks-container');
+    const tasks = Array.from(tasksContainer.getElementsByClassName('task'));
+
+    const sortedTasks = tasks.sort((a, b) => {
+        const dateA = new Date(a.querySelector('p:nth-of-type(3)').innerText.split(": ")[1]);
+        const dateB = new Date(b.querySelector('p:nth-of-type(3)').innerText.split(": ")[1]);
+        return dateA - dateB;
+    });
+
+    tasksContainer.innerHTML = '';
+    sortedTasks.forEach(task => {
+        tasksContainer.appendChild(task);
+    });
+}
+
+function organizarPorPrioridade() {
+    const tasksContainer = document.getElementById('tasks-container');
+    const tasks = Array.from(tasksContainer.getElementsByClassName('task'));
+
+    const sortedTasks = tasks.sort((a, b) => {
+        const priorityA = extrairPrioridade(a);
+        const priorityB = extrairPrioridade(b);
+        return prioridadeNumerica(priorityA) - prioridadeNumerica(priorityB);
+    });
+
+    tasksContainer.innerHTML = '';
+    sortedTasks.forEach(task => {
+        tasksContainer.appendChild(task);
+    });
+}
+
+function extrairPrioridade(taskDiv) {
+    const priorityText = taskDiv.querySelector('p:nth-of-type(1)').innerText.split(": ")[1];
+    return priorityText.toLowerCase();
+}
+
+function prioridadeNumerica(priority) {
+    switch (priority) {
+        case 'alta':
+            return 1;
+        case 'média':
+            return 2;
+        case 'baixa':
+            return 3;
+        default:
+            return 0;
+    }
+}
+
+function organizarConcluidas() {
+    const completedContainer = document.getElementById('completed-container');
+    const completedTasks = Array.from(completedContainer.getElementsByClassName('completed-task'));
+
+    const sortedCompletedTasksIniciais = completedTasks.sort((a, b) => {
+        const titleA = extrairInicialTitulo(a);
+        const titleB = extrairInicialTitulo(b);
+        return titleA.localeCompare(titleB);
+    });
+
+    const altaPrioridade = [];
+    const mediaPrioridade = [];
+    const baixaPrioridade = [];
+
+    sortedCompletedTasksIniciais.forEach(task => {
+        const priority = extrairPrioridade(task);
+        switch (priority) {
+            case 'alta':
+                altaPrioridade.push(task);
+                break;
+            case 'média':
+                mediaPrioridade.push(task);
+                break;
+            case 'baixa':
+                baixaPrioridade.push(task);
+                break;
+            default:
+                break;
+        }
+    });
+
+    const sortedAltaPrioridade = altaPrioridade.sort((a, b) => extrairInicialTitulo(a).localeCompare(extrairInicialTitulo(b)));
+    const sortedMediaPrioridade = mediaPrioridade.sort((a, b) => extrairInicialTitulo(a).localeCompare(extrairInicialTitulo(b)));
+    const sortedBaixaPrioridade = baixaPrioridade.sort((a, b) => extrairInicialTitulo(a).localeCompare(extrairInicialTitulo(b)));
+
+    completedContainer.innerHTML = '';
+
+    sortedAltaPrioridade.forEach(task => {
+        completedContainer.appendChild(task);
+    });
+
+    sortedMediaPrioridade.forEach(task => {
+        completedContainer.appendChild(task);
+    });
+
+    sortedBaixaPrioridade.forEach(task => {
+        completedContainer.appendChild(task);
+    });
+}
+
+function extrairInicialTitulo(taskDiv) {
+    const titleText = taskDiv.querySelector('h3').innerText;
+    const firstChar = titleText.charAt(0).toLowerCase();
+    return firstChar;
 }
