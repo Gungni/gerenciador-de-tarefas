@@ -4,17 +4,16 @@ body {
     padding: 0;
     background-image: url("./img/verde.jpg");
     background-size:cover;
-    
     height: 100vh;
 }
 
 #top-bar {
-    height: 20%;
+    height: 10%;
     width: 100%;
 }
 
 #aka {
-    width: 18%;
+    width: 10%;
     height: 100%;
     background-image: url(./img/akhasic2.png);
     background-size: 100% 100%;
@@ -99,6 +98,22 @@ nav button {
 
 nav button:hover {
     background-color: #45a049;
+}
+
+.content-container {
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#task-form-container {
+    display: none;
 }
 
 #task-list,

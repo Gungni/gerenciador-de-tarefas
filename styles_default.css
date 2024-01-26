@@ -8,12 +8,12 @@ body {
 }
 
 #top-bar {
-    height: 20%;
+    height: 10%;
     width: 100%;
 }
 
 #aka {
-    width: 18%;
+    width: 10%;
     height: 100%;
     background-image: url(./img/akhasic1.png);
     background-size: 100% 100%;
@@ -100,8 +100,24 @@ nav button:hover {
     background-color: pink;
 }
 
+.content-container {
+    max-width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 #task-list,
 #completed-tasks {
+    display: none;
+}
+
+#task-form-container {
     display: none;
 }
 
@@ -116,6 +132,7 @@ h2 {
     text-align: center;
     color: pink;
 }
+
 #task-form, #task-list, #completed-tasks {
     max-width: 800px;
     margin: 20px auto;

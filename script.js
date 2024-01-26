@@ -29,18 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
 function mostrarConteudo(conteudo) {
-    const taskForm = document.getElementById('task-form-container');
+    const inicioDiv = document.getElementById('inicio');
+    const taskFormContainer = document.getElementById('task-form-container');
     const taskList = document.getElementById('task-list');
     const completedTasks = document.getElementById('completed-tasks');
 
-    taskForm.style.display = 'none';
+    inicioDiv.style.display = 'none';
+    taskFormContainer.style.display = 'none';
     taskList.style.display = 'none';
     completedTasks.style.display = 'none';
 
     if (conteudo === 'task-form') {
-        taskForm.style.display = 'block';
+        taskFormContainer.style.display = 'block';
     } else if (conteudo === 'task-list') {
         taskList.style.display = 'block';
     } else if (conteudo === 'completed-tasks') {
@@ -159,8 +160,8 @@ function openEditModal(taskDiv) {
         <label for="edit-checklist">Checklist (separe os itens por vírgulas):</label>
         <input type="text" id="edit-checklist" name="edit-checklist" value="${checklistItems.join(', ')}">
 
-        <button type="button" onclick="saveChanges('${title}', '${dueDate}')">Salvar Alterações</button>
-        <button type="button" onclick="deleteTask('${title}')">Excluir Tarefa</button>
+        <button type="button" onclick="saveChanges('${title}', '${dueDate}')">Salvar</button>
+        <button type="button" onclick="deleteTask('${title}')">Excluir</button>
     `;
 
     const editModal = document.getElementById('edit-task-modal');

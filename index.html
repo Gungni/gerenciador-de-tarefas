@@ -22,10 +22,20 @@
     </div>
 
     <nav>
-        <button onclick="mostrarConteudo('task-form')">Criar</button>
-        <button onclick="mostrarConteudo('task-list')">Tarefas</button>
-        <button onclick="mostrarConteudo('completed-tasks')">Concluídas</button>
+        <button onclick="mostrarConteudo('task-form')">
+            <img src="./img/icon/im.png" alt="Criar" width="20" height="20">
+        </button>
+        <button onclick="mostrarConteudo('task-list')">
+            <img src="./img/icon/escrita.png" alt="Criar" width="20" height="20">
+        </button>
+        <button onclick="mostrarConteudo('completed-tasks')">
+            <img src="./img/icon/papel.png" alt="Criar" width="20" height="20">
+        </button>
     </nav>
+
+    <div id="inicio" class="content-container">
+        <img src="./img/inicio.jpg">
+    </div>
     
 
     <div id="task-form-container">
@@ -86,8 +96,8 @@
                 <label for="edit-checklist">Checklist (separe os itens por vírgulas):</label>
                 <input type="text" id="edit-checklist" name="edit-checklist">
 
-                <button type="button" onclick="saveChanges()">Salvar Alterações</button>
-                <button type="button" onclick="deleteTask()">Excluir Tarefa</button>
+                <button type="button" onclick="saveChanges()">Salvar</button>
+                <button type="button" onclick="deleteTask()">Excluir</button>
                 
             </form>
         </div>
@@ -95,15 +105,15 @@
 
     <div id="task-list">
         <h2>Lista de Tarefas</h2>
-        <button onclick="baixarTarefas()">Baixar Tarefas</button>
-        <button onclick="organizarPorPrioridade()">Organizar por Prioridade</button>
-        <button onclick="organizarPorData()">Organizar por Data</button>
+        <button onclick="baixarTarefas()"><img src="./img/icon/dow.png" alt="Criar" width="20" height="20"></button>
+        <button onclick="organizarPorPrioridade()"><img src="./img/icon/pri.png" alt="Criar" width="20" height="20"></button>
+        <button onclick="organizarPorData()"><img src="./img/icon/temp.png" alt="Criar" width="20" height="20"></button>
         <div id="tasks-container"></div>
     </div>
 
     <div id="completed-tasks">
         <h2>Tarefas Concluídas</h2>
-        <button onclick="organizarConcluidas()">Organizar Concluídas</button>
+        <button onclick="organizarConcluidas()"><img src="./img/icon/az.png" alt="Criar" width="20" height="20"></button>
         <div id="completed-container"></div>
     </div>
 
