@@ -284,32 +284,7 @@ function loadTasksFromLocalStorage() {
 loadTasksFromLocalStorage();
 
 function baixarTarefas() {
-    const contTasks = document.getElementById('tasks-container');
-    const contTarefasConcluidas = document.getElementById('completed-container');
-
-    const htmlTarefas = contTasks.innerHTML;
-    const htmlTarefasConcluidas = contTarefasConcluidas.innerHTML;
-
-    const dadosTarefas = {
-        tarefas: extrairDadosTarefas(htmlTarefas),
-        tarefasConcluidas: extrairDadosTarefas(htmlTarefasConcluidas)
-    };
-
-    const jsonDados = JSON.stringify(dadosTarefas, null, 2);
-
-    const blob = new Blob([jsonDados], { type: 'application/json' });
-
-    const linkDownload = document.createElement('a');
-    linkDownload.href = URL.createObjectURL(blob);
-    
-    const data = new Date();
-    const nomeArquivo = `tarefas_export_${data.getFullYear()}-${data.getMonth() + 1}-${data.getDate()}.json`;
-    linkDownload.download = nomeArquivo;
-
-    document.body.appendChild(linkDownload);
-    linkDownload.click();
-
-    document.body.removeChild(linkDownload);
+    window.print();
 }
 
 function extrairDadosTarefas(html) {
